@@ -1,7 +1,6 @@
 {% extends 'base_auth.html' %}
 {% load static %}
 
-
 {% block content %}
 
 <div class="row">
@@ -10,8 +9,13 @@
     <div class="card mt-5">
 
 
-      <div class="card-body">
-        <div class="card-title py-3">
+      <div class="card-body rounded-pill">
+        <!-- Add your logo image above the registration form -->
+        <div class="text-center mb-4">
+          <img src="{% static 'img/catlogo.png' %}" alt="Logo" class="logo-img" style="width: 200px; height: auto;">
+        </div>
+        <!-- Bring "Register for a free account" to the front -->
+        <div class="card-title py-3 text-center">
           <h4>Register for a free account</h4>
         </div>
         <form action="{% url 'register' %}" method="post">
@@ -55,7 +59,7 @@
             />
             <small class="float-right py-3 showPasswordToggle">SHOW</small>
           </div>
-          <input type="submit" value="Register" class="btn btn-block btn-primary submit-btn" />
+          <input type="submit" value="Register" class="btn btn-block btn-primary submit-btn rounded-pill" />
         </form>
 
       </div>

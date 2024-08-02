@@ -79,10 +79,11 @@ WSGI_APPLICATION = 'expenseswebsite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_USER_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
+        'NAME': 'ENTER THE NAME OF YOUR POSTGRE DATABASE NAME',
+        'USER': 'postgres',
+        'PASSWORD': 'ENTER YOUR POSTGRESQL PASSWORD HERE',
+        'HOST': 'localhost',
+        'PORT' : '5432',
     }
 }
 
@@ -135,9 +136,9 @@ MESSAGE_TAGS = {
 
 
 # email stuff
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'ENTER YOUR OFFICIAL EMAIL HERE'
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+DEFAULT_FROM_EMAIL = 'ENTER YOUR OFFICIAL EMAIL HERE'
 EMAIL_PORT = 587
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_PASSWORD = 'ENTER YOUR PASSWORD HERE'

@@ -1,18 +1,20 @@
 {% extends 'base_auth.html' %}
 {% load static %}
 
-
 {% block content %}
 
 <div class="row">
   <div class="col-md-4"></div>
   <div class="col-md-4">
     <div class="card mt-5">
-
-
-      <div class="card-body">
-        <div class="card-title py-3">
-          <h4>Login to your  account</h4>
+      <div class="card-body rounded-pill">
+        <!-- Add your logo image above the login form -->
+        <div class="text-center mb-4">
+          <img src="{% static 'img/catlogo.png' %}" alt="Logo" class="logo-img" style="width: 200px; height: auto;">
+        </div>
+        <!-- Bring "Login to your account" to the center -->
+        <div class="card-title py-3 text-center">
+          <h4>Login to your account</h4>
         </div>
         <form action="{% url 'login' %}" method="post">
           {% csrf_token %}
@@ -25,7 +27,7 @@
               placeholder="username"
               id="usernameField"
               value="{{fieldValues.username}}"
-              class="form-control form-control-sm"
+              class="form-control form-control-sm "
             />
           </div>
           <div class="form-group">
@@ -37,17 +39,13 @@
               id="passwordField"
             />
           </div>
-          <input type="submit" value="Login" class="btn btn-block btn-primary submit-btn" />
+          <input type="submit" value="Login" class="btn btn-block btn-primary submit-btn rounded-pill" />
         </form>
-
-      </div>
-
+        <a href="{% url 'register' %}" class="btn btn-block btn-primary submit-btn rounded-pill">Create an Account</a>
       </div>
     </div>
   </div>
   <div class="col-md-4"></div>
 </div>
-
-<script src="{% static 'js/register.js' %}"></script>
 
 {% endblock content %}

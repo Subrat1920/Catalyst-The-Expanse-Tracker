@@ -10,7 +10,8 @@ from validate_email import validate_email
 from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
+from smtplib import *
 from django.core.mail import send_mail
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
@@ -43,6 +44,8 @@ class UsernameValidationView(View):
             return JsonResponse({'username_error': 'sorry username in use,choose another one '}, status=409)
         return JsonResponse({'username_valid': True})
 
+
+import smtplib
 
 class RegistrationView(View):
     def get(self, request):
@@ -86,23 +89,41 @@ class RegistrationView(View):
 
                 activate_url = 'http://'+current_site.domain+link
 
-                email = EmailMessage(
-                    email_subject,
-                    'Hi '+user.username + ', Please the link below to activate your account \n'+activate_url,
-                    'noreply@semycolon.com',
-                    [email],
-                )
-                email.send(fail_silently=False)
-                messages.success(request, 'Account successfully created')
-                return render(request, 'authentication/register.html')
+                try:
+                    # Establish SMTP connection
+                    connection = smtplib.SMTP('smtp.gmail.com', 587)
+                    connection.starttls()
+                    connection.login('YOUR EMAIL', 'YOUR PASSWORD')
+
+                    # Construct and send email
+                    email_message = 'Hi '+user.username + ', Please use the link below to activate your account: \n'+activate_url
+                    email = EmailMessage(
+                        email_subject,
+                        email_message,
+                        'noreply@semycolon.com',
+                        [email],
+                    )
+                    email.send(fail_silently=False)
+
+                    # Close SMTP connection
+                    connection.quit()
+
+                    messages.success(request, 'Account successfully created, Please activate your account through email to login')
+                    return render(request, 'authentication/register.html')
+
+                except Exception as e:
+                    # Handle SMTP connection or email sending errors
+                    messages.error(request, 'Failed to send activation email')
+                    return render(request, 'authentication/register.html')
 
         return render(request, 'authentication/register.html')
+
 
 
 class VerificationView(View):
     def get(self, request, uidb64, token):
         try:
-            id = force_text(urlsafe_base64_decode(uidb64))
+            id = force_str(urlsafe_base64_decode(uidb64))
             user = User.objects.get(pk=id)
 
             if not account_activation_token.check_token(user, token):
