@@ -24,21 +24,21 @@
 
 ## How to clone the app
 ###### In order to clone the app follow the following steps
-  1. Open Terminal and enter the terminal code :
-     ###### git clone git@github.com:Subrat1920/Catalyst-The-Expanse-Tracker.git
-  2. Activate Virtual Environemnt :
-     ###### venv\Scripts\activate
-  3. Install the required packages :
-     ###### pip install -r requirements.txt
-  4. Check for the migrations :
-     ###### python manage.py showmigrations
-  5. Migrate the dependencies :
-     ###### python manage.py migrate
-  6. Make migrations :
-      ###### python manage.py makemigrations
-  7. Make a super-user for admin panel controll :
-      ###### python manage.py createsuperuser
-  8. Give the required option to the terminal
-  9. Run the server :
+  ######  1. Open Terminal and enter the terminal code :
+     git clone git@github.com:Subrat1920/Catalyst-The-Expanse-Tracker.git
+  ######  2. Activate Virtual Environemnt :
+     venv\Scripts\activate
+  ######  3. Install the required packages :
+     pip install -r requirements.txt
+  ######  4. Check for the migrations :
+     python manage.py showmigrations
+  ######  5. Migrate the dependencies :
+     python manage.py migrate
+  ######  6. Make migrations :
+      python manage.py makemigrations
+  ######  7. Make a super-user for admin panel controll :
+      python manage.py createsuperuser
+  ######  8. Give the required option to the terminal
+  ######  9. Run the server :
       ###### python manage.py runserver
         
