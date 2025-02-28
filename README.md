@@ -40,5 +40,5 @@
       python manage.py createsuperuser
   ######  8. Give the required option to the terminal
   ######  9. Run the server :
-      ###### python manage.py runserver
+      python manage.py runserver
         
